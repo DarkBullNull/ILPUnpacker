@@ -15,22 +15,7 @@ namespace ILPUnpacker{
             Console.Title = "Test ILProtector Unpacker by TobitoFatito";
             Harmony.Patch();
             ModuleDefMD Module = ModuleDefMD.Load(args[0]);
-            Assembly asm = Assembly.LoadFrom(args[0]);
-            TypeDef globalType =Module.GlobalType;
-            int num = 0;
-            foreach (FieldDef fieldDef in globalType.Fields)
-            {
-                if (fieldDef.Name == "Invoke")
-                {
-                    num = fieldDef.MDToken.ToInt32();
-                }
-            }
-            if (num == 0)
-            {
-                Console.WriteLine("[!] Couldn't find Invoke");
-            }
-            
-            MethodInfo methodInfo = (MethodInfo) asm.EntryPoint;
+            Assembly asm = Assembly.LoadFrom(args[0]); MethodInfo methodInfo = (MethodInfo) asm.EntryPoint;
 
             Console.WriteLine("Invoking!!!");
             if (methodInfo.GetParameters().Length == 0){
@@ -62,10 +47,7 @@ namespace ILPUnpacker{
                         }
                     }
                     catch{
-                        
                     }
-                    
-
                 }
             }
 
@@ -97,9 +79,7 @@ namespace ILPUnpacker{
                 return reader.GetMethod();
             }
             catch{
-                
             }
-
             return null;
         }
     }
